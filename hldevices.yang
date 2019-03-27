@@ -28,7 +28,7 @@ module hldevices {
 
     grouping cards {
         leaf slot-id {
-            type int16;
+            type int32;
         }
         leaf card-type {
             type card-type-enum;

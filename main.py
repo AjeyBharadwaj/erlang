@@ -3,7 +3,7 @@ import pdb
 
 pdb.set_trace()
 
-GET_ELEM = "get_elem_{0}_TO_{1}(Tctx, HLKeyPath, Extra) -> \n\
+GET_ELEM = "get_elem_{0}_FROM_{1}(Tctx, HLKeyPath, Extra) -> \n\
     LLKey = {2}(HLKeyPath);  \n\
     VAL = ec_getnet:get_elem(Tctx, [LLKey, #map.mappings.Extra],_). \n\
     {3}(VAL)\n"
@@ -120,16 +120,17 @@ while 1:
         
         #pdb.set_trace()
         fmapper.write("#mappings{0}path=[{1}]".format("{", ''.join(ll_full_path)))
-        fmapper.write(",get_elem=fun get_elem_{0}/3".format(function_name))
-        fmapper.write(",set_elem=fun set_elem_{0}/3".format(function_name))
+        fmapper.write(",get_elem=fun get_elem_{0}_FROM_{1}/3".format(hl_leaf_type, ll_leaf_type))
+        fmapper.write(",set_elem=fun set_elem_{0}_TO_{1}/3".format(hl_leaf_type, ll_leaf_type))
         fmapper.write("{0};".format("}"))
                 
         if function_name not in conversion_function_list:
             conversion_function_list.append(function_name)
-            ffunctions.write(GET_ELEM.format(hl_leaf_type, ll_leaf_type, dnkey_func, "transform_"+hl_leaf_type+"_TO_"+ll_leaf_type))
-            ffunctions.write(SET_ELEM.format(hl_leaf_type, ll_leaf_type, dnkey_func, "transform_"+ll_leaf_type+"_TO_"+hl_leaf_type))
+            ffunctions.write(GET_ELEM.format(hl_leaf_type, ll_leaf_type, dnkey_func, "transform_"+ll_leaf_type+"_TO_"+hl_leaf_type))
+            ffunctions.write(SET_ELEM.format(hl_leaf_type, ll_leaf_type, dnkey_func, "transform_"+hl_leaf_type+"_TO_"+ll_leaf_type))
             
             fconversion.write(TRANSFORM_ELEM.format(hl_leaf_type, ll_leaf_type))
+            fconversion.write(TRANSFORM_ELEM.format(ll_leaf_type, hl_leaf_type))
         
     
     fmapper.write("\n")
