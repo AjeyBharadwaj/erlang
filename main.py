@@ -1,7 +1,6 @@
 import sys
 import pdb
 
-pdb.set_trace()
 
 GET_ELEM = "get_elem_{0}_FROM_{1}(Tctx, HLKeyPath, Extra) -> \n\
     LLKey = {2}(HLKeyPath);  \n\
@@ -82,7 +81,6 @@ hl_list_path,ll_list_path = path.split(",")
 _, hl_list_full_path = get_full_path(hl_list_path, hl_contents, hl_ns, hl_root);
 _, ll_list_full_path = get_full_path(ll_list_path, ll_contents, ll_ns, ll_root);
 
-pdb.set_trace()
 fmapper.write("[{0}] ->".format(''.join(hl_list_full_path)));
 fmapper.write("\n\t")
 fmapper.write("#mappings{0}path=[{1}]{2}".format("{", ''.join(ll_list_full_path), "};"))
@@ -138,7 +136,7 @@ while 1:
     fmapper.write("\n")
     
     
-
+print("DONE!!!")
 
 fmapper.close()
 ffunctions.close()
