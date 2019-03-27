@@ -4,11 +4,11 @@ module lldevices {
 
 
     grouping llmanufdata {
-        leaf PID {
+        leaf ProductID {
             type string;
         }
         leaf SERIAL {
-            type string;
+            type bool;
         }
         leaf MAC {
             type string;
@@ -23,6 +23,12 @@ module lldevices {
             type string;
         }
     }
+    
+    grouping interface {
+        leaf fullspeed {
+            type int64;
+        }
+    }
 
     container lldevices {
         list lldevice {
@@ -32,6 +38,7 @@ module lldevices {
             }
             uses llmanufdata;
             uses llcards;
+            uses interface;
         }
     }
     

@@ -34,6 +34,12 @@ module hldevices {
             type card-type-enum;
         }
     }
+    
+    grouping ports {
+        leaf speed {
+            type bool;
+        }
+    }
 
     container devices {
         list device {
@@ -43,6 +49,7 @@ module hldevices {
             }
             uses manufdata;
             uses cards;
+            uses ports;
         }
     }
 }

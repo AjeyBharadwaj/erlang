@@ -9,9 +9,9 @@ dwFunc
 device,lldevice
 device-id,device-id
 device/device-id,lldevice/device-id
-device/manufdata/PID,lldevice/llmanufdata/PID
+device/manufdata/PID,lldevice/llmanufdata/ProductID
 device/manufdata/SERIAL,lldevice/llmanufdata/SERIAL
 device/cards/slot-id,lldevice/llcards/slot-id
 device/cards/card-type,lldevice/llcards/card-type
-
+device/ports/speed,lldevice/interface/fullspeed
 

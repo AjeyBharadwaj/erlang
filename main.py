@@ -5,14 +5,14 @@ pdb.set_trace()
 
 GET_ELEM = "get_elem_{0}_FROM_{1}(Tctx, HLKeyPath, Extra) -> \n\
     LLKey = {2}(HLKeyPath);  \n\
-    VAL = ec_getnet:get_elem(Tctx, [LLKey, #map.mappings.Extra],_). \n\
+    VAL = ec_getnet:get_elem(Tctx, [{4}LLKey{5}, #map.mappings.Extra],_). \n\
     {3}(VAL)\n"
 
 
 SET_ELEM = "set_elem_{0}_TO_{1}(Tctx, HLKeyPath, Val, Extra) -> \n\
     Newval={3}(Val)\n\
     LLKey = {2}(HLKeyPath); \n\
-    ec_genet:set_elem(Tctx, [LLKey, #map.mappings.Extra, Newval). \n"
+    ec_genet:set_elem(Tctx, [{4}LLKey{5}, #map.mappings.Extra, Newval). \n"
 
 TRANSFORM_ELEM = "transform_{0}_TO_{1}(VAL) -> \n\
     VAL.\n"
@@ -103,10 +103,11 @@ while 1:
         break;
     hl_path,ll_path = path.split(",")
     
+    #pdb.set_trace()
+    
     hl_leaf_type, hl_full_path = get_full_path(hl_path, hl_contents, hl_ns, hl_root, hlkey);
     ll_leaf_type, ll_full_path = get_full_path(ll_path, ll_contents, ll_ns, ll_root, llkey);
 
-    #pdb.set_trace()
     fmapper.write("[{0}] ->".format(''.join(hl_full_path)));
     fmapper.write("\n\t")
         
@@ -122,12 +123,13 @@ while 1:
         fmapper.write("#mappings{0}path=[{1}]".format("{", ''.join(ll_full_path)))
         fmapper.write(",get_elem=fun get_elem_{0}_FROM_{1}/3".format(hl_leaf_type, ll_leaf_type))
         fmapper.write(",set_elem=fun set_elem_{0}_TO_{1}/3".format(hl_leaf_type, ll_leaf_type))
+        fmapper.write(",extra=[{0}]".format(''.join(ll_full_path)))
         fmapper.write("{0};".format("}"))
                 
         if function_name not in conversion_function_list:
             conversion_function_list.append(function_name)
-            ffunctions.write(GET_ELEM.format(hl_leaf_type, ll_leaf_type, dnkey_func, "transform_"+ll_leaf_type+"_TO_"+hl_leaf_type))
-            ffunctions.write(SET_ELEM.format(hl_leaf_type, ll_leaf_type, dnkey_func, "transform_"+hl_leaf_type+"_TO_"+ll_leaf_type))
+            ffunctions.write(GET_ELEM.format(hl_leaf_type, ll_leaf_type, dnkey_func, "transform_"+ll_leaf_type+"_TO_"+hl_leaf_type, "{", "}"))
+            ffunctions.write(SET_ELEM.format(hl_leaf_type, ll_leaf_type, dnkey_func, "transform_"+hl_leaf_type+"_TO_"+ll_leaf_type, "{", "}"))
             
             fconversion.write(TRANSFORM_ELEM.format(hl_leaf_type, ll_leaf_type))
             fconversion.write(TRANSFORM_ELEM.format(ll_leaf_type, hl_leaf_type))
