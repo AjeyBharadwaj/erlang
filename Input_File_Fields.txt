@@ -1,0 +1,12 @@
+PATH OF HL YANG FILES 
+PATH OF LL YANG FILES
+HL YANG FILE   
+LL YANG FILE                
+HL NS, HL ROOT 
+LL NS, LL ROOT 
+UPKEYFUN                Translate key from LL to HL         ( To be provided by user )           
+DWKEYFUN                Translate key from HL to LL         ( To be provided by user )
+HL LIST, LL LIST    
+HL KEY, LL KEY              
+HL PATH, LL PATH
+.......
