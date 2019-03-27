@@ -1,0 +1,17 @@
+svo/Models/high-level
+svo/Models/low-level
+hldevices.yang
+lldevices.yang
+http://tail-f.com/ns/example/hldevices,devices
+http://tail-f.com/ns/example/lldevices,lldevices
+upFunc
+dwFunc
+device,lldevice
+device-id,device-id
+device/device-id,lldevice/device-id
+device/manufdata/PID,lldevice/llmanufdata/PID
+device/manufdata/SERIAL,lldevice/llmanufdata/SERIAL
+device/cards/slot-id,lldevice/llcards/slot-id
+device/cards/card-type,lldevice/llcards/card-type
+
+

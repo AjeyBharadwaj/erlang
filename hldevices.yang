@@ -1,0 +1,48 @@
+module hldevices {
+    namespace "http://tail-f.com/ns/example/hldevices";
+    prefix devices;
+
+
+    grouping manufdata {
+        leaf PID {
+            type string;
+        }
+        leaf SERIAL {
+            type string;
+        }
+    }
+
+    typedef card-type-enum {
+        type enumeration {
+            enum "CONTROLLER" {
+                value 1;
+            }
+            enum "TXP" {
+                value 2;
+            }
+            enum "MXP" {
+                value 3;
+            }
+        }
+    }
+
+    grouping cards {
+        leaf slot-id {
+            type int16;
+        }
+        leaf card-type {
+            type card-type-enum;
+        }
+    }
+
+    container devices {
+        list device {
+            key device-id;
+            leaf device-id {
+                type string;
+            }
+            uses manufdata;
+            uses cards;
+        }
+    }
+}

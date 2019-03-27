@@ -1,0 +1,38 @@
+module lldevices {
+    namespace "http://tail-f.com/ns/example/lldevices";
+    prefix lldevices;
+
+
+    grouping llmanufdata {
+        leaf PID {
+            type string;
+        }
+        leaf SERIAL {
+            type string;
+        }
+        leaf MAC {
+            type string;
+        }
+    }
+
+    grouping llcards {
+        leaf slot-id {
+            type int16;
+        }
+        leaf card-type {
+            type string;
+        }
+    }
+
+    container lldevices {
+        list lldevice {
+            key device-id;
+            leaf device-id {
+                type string;
+            }
+            uses llmanufdata;
+            uses llcards;
+        }
+    }
+    
+}
